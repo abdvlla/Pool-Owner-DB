@@ -1,0 +1,25 @@
+<form action="pools" method="GET">
+<h2 class="page-header">All Pools</h2>
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Owner</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% pools.forEach((pool, index) => { %>
+        <tr>
+          <td><%= pool.owner ? pool.owner.name : 'Owner Not Chosen or Deleted' %></td>
+          <td><%= pool.type %></td>
+          <td><%= pool.status %></td>
+          <td><a class="btn btn-primary" href="/pools/<%= pool.id %>">View</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+</form>

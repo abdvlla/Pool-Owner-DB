@@ -1,0 +1,17 @@
+<header>
+  <nav class="header-nav">
+    <a class="header-title" href="/">HHL</a>
+    <ul>
+      <li><a href="/owners">Owners</a></li>
+      <li><a href="/owners/new">Add Owner</a></li>
+      <li><a href="/pools">Pools</a></li>
+      <li><a href="/pools/new">Add Pool</a></li>
+      <li style="float:right"><a href="/logout"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+        <form id="logout-form" action="/logout?_method=DELETE" method="POST" style="display: none;">
+          <input type="hidden" name="_method" value="DELETE">
+        </form>
+      </li>
+    </ul>
+  </nav>
+</header>

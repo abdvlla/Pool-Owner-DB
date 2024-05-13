@@ -1,0 +1,26 @@
+<% if (poolsByOwner.length > 0) { %>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% poolsByOwner.forEach((row, index) => { %>
+                            <tr class="align-middle">
+                                <td><%= row.type %></td>
+                                <td><%= row.status %></td>
+                                <td><a class="btn btn-primary" href="/pools/<%= row.id %>">View</a></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<% } %>

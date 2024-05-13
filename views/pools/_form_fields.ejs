@@ -1,0 +1,38 @@
+<div class="form-row">
+    <div class="form-item">
+        <label>Type</label>
+        <select name="type">
+            <option label="IG" value="IG" <%=pool.type==='IG' ? 'selected' : '' %>></option>
+            <option label="AG" value="AG" <%=pool.type==='AG' ? 'selected' : '' %>></option>
+            <option label="OG" value="OG" <%=pool.type==='OG' ? 'selected' : '' %>></option>
+        </select>
+    </div>
+    <div class="form-item">
+        <label>Owner</label>
+        <select name="owner">
+            <% owners.forEach(owner => { %>
+                <option label="<%= owner.name %>" value="<%= owner.id %>" <%= pool.owner && pool.owner.toString() === owner.id.toString() ? 'selected' : '' %>></option>
+            <% }) %>
+        </select>
+    </div>
+    
+    <div class="form-item">
+        <label>Status</label>
+        <select name="status">
+            <option label="Clear" value="Clear" <%= pool.status === 'Clear' ? 'selected' : '' %>></option>
+            <option label="Cloudy" value="Cloudy" <%= pool.status === 'Cloudy' ? 'selected' : '' %>></option>
+            <option label="Green" value="Green" <%= pool.status === 'Green' ? 'selected' : '' %>></option>
+        </select>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-item form-item-no-grow">
+        <label>Cover</label>
+        <input type="file" name="cover" class="book-cover filepond">
+    </div>
+    <div class="form-item">
+        <label>Description</label>
+        <textarea name="description"><%= pool.description %></textarea>
+    </div>
+</div>

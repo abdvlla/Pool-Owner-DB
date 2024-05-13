@@ -1,0 +1,13 @@
+<h2 class="page-header">
+  <%= owner.name %>
+</h2>
+<div class="owner-number"><%= owner.number %></div>
+<div class="btn-row">
+  <a class="btn btn-primary" href="/owners/<%= owner.id %>/edit">Edit</a>
+  <%- include('../partials/deleteForm', { url: `/owners/${owner.id}` }) %>
+</div>
+
+<% if (poolsByOwner.length > 0) { %>
+  <h2 class="page-header">Pools By Owner</h2>
+  <%- include('../partials/ownerPoolsList', { pools: poolsByOwner }) %>
+<% } %>
