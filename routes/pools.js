@@ -7,8 +7,8 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 // All Pools Route
 router.get('/', ensureAuthenticated, async (req, res) => {
   let query = Pool.find()
-  if (req.query.title != null && req.query.title != '') {
-    query = query.regex('title', new RegExp(req.query.title, 'i'))
+  if (req.query.name != null && req.query.name != '') {
+    query = query.regex('name', new RegExp(req.query.name, 'i'))
   }
   // if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
   //   query = query.lte('publishDate', req.query.publishedBefore)
@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// Show Book Route
+// Show Pook Route
 router.get('/:id', async (req, res) => {
   try {
     const pool = await Pool.findById(req.params.id)
@@ -58,6 +58,25 @@ router.get('/:id', async (req, res) => {
     res.render('pools/show', { pool: pool })
   } catch {
     res.redirect('/')
+  }
+})
+
+// Delete Pool Page
+router.delete('/:id', async (req, res) => {
+  let pool
+  try {
+    pool = await Pool.findById(req.params.id)
+    await pool.deleteOne()
+    res.redirect('/pools')
+  } catch {
+    if (pool != null) {
+      res.render('pools/show', {
+        pool: pool,
+        errorMessage: 'Could not remove pool'
+      })
+    } else {
+      res.redirect('/')
+    }
   }
 })
 

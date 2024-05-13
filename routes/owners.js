@@ -36,7 +36,8 @@ router.post('/', async (req, res) => {
     const newOwner = await owner.save()
     console.log("hi");
     res.redirect(`owners/${newOwner.id}`)
-  } catch {
+  } catch (error) {
+    console.log(error);
     res.render('owners/new', {
       owner: owner,
       errorMessage: 'Error creating Owner'
@@ -71,7 +72,6 @@ router.put('/:id', ensureAuthenticated, async (req, res) => {
   try {
     owner = await Owner.findById(req.params.id)
     owner.name = req.body.name
-    owner.lastName = req.body.lastName
     owner.email = req.body.email
     owner.number = req.body.number
     await owner.save()
