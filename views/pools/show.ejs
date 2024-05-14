@@ -1,7 +1,6 @@
 <h2 class="page-header"><%= pool.title %></h2>
 <div class="book-details">
   <div>
-    <img class="book-cover" src="<%= pool.coverImagePath %>">
     <div class="book-details-btn-grid">
       <a class="btn btn-primary" href="/pools/<%= pool.id %>/edit">Edit</a>
       <%- include('../partials/deleteForm', { url: `/pools/${pool.id}` }) %>
@@ -21,4 +20,5 @@
     <div class="book-details-label">Description:</div>
     <div><%= pool.description %></div>
   </div>
+  <img class="book-cover" src="<%= pool.coverImagePath %>">
 </div>

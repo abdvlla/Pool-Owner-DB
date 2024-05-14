@@ -81,9 +81,9 @@ app.post('/register', ensureNotAuthenticated, async (req, res) => {
 
 // Login route (POST)
 app.post('/login', ensureNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/', // Redirect to homepage on successful login
-  failureRedirect: '/login', // Redirect back to login page on failure
-  failureFlash: true // Enable flashing error messages
+  successRedirect: '/', 
+  failureRedirect: '/login', 
+  failureFlash: true 
 }));
 
 // Logout route
