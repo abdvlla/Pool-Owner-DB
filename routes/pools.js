@@ -83,12 +83,37 @@ router.get('/:id/edit', async (req, res) => {
   }
 })
 
+router.put('/:id', async (req, res) => {
+  let pool;
+
+  try {
+    pool = await Pool.findById(req.params.id);
+    pool.type = req.body.type;
+    pool.owner = req.body.owner;
+    pool.status = req.body.status;
+    pool.description = req.body.description;
+    
+    if (req.body.cover != null && req.body.cover !== '') {
+      saveCover(pool, req.body.cover);
+    }
+
+    await pool.save();
+    res.redirect(`/pools/${pool.id}`);
+  } catch (err) {
+    console.error(err);
+    if (pool != null) {
+      renderEditPage(res, pool, true);
+    } else {
+      res.redirect('/');
+    }
+  }
+});
+
 // Delete Pool Page
 router.delete('/:id', async (req, res) => {
   try {
     const pool = await Pool.findById(req.params.id);
 
-    // Remove the pool cover image if it exists
     if (pool.coverImageName) {
       removePoolCover(pool.coverImageName);
     }
@@ -108,23 +133,8 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
-// async function renderNewPage(res, pool, hasError = false) {
-
-//   renderFormPage(res, pool, 'new', hasError)
-// }
-
-async function renderNewPage(res, pool, hasError = false) {
-  try {
-    const owners = await Owner.find({})
-    const params = {
-      owners: owners,
-      pool: pool
-    }
-    if (hasError) params.errorMessage = 'Error Creating Pool'
-    res.render('pools/new', params)
-  } catch {
-    res.redirect('/pools')
-  }
+async function renderNewPage(res, book, hasError = false) {
+  renderFormPage(res, book, 'new', hasError)
 }
 
 function removePoolCover(fileName) {
@@ -137,25 +147,25 @@ async function renderEditPage(res, pool, hasError = false) {
   renderFormPage(res, pool, 'edit', hasError)
 }
 
-// async function renderFormPage(res, pool, form, hasError = false) {
-//   try {
-//     const owners = await Owner.find({})
-//     const params = {
-//       owners: owners,
-//       pool: pool
-//     }
-//     if (hasError) {
-//       if (form === 'edit') {
-//         params.errorMessage = 'Error Updating Pool'
-//       } else {
-//         params.errorMessage = 'Error Creating Pool'
-//       }
-//     }
-//     res.render(`pools/${form}`, params)
-//   } catch {
-//     res.redirect('/pools')
-//   }
-// }
+async function renderFormPage(res, pool, form, hasError = false) {
+  try {
+    const owners = await Owner.find({})
+    const params = {
+      owners: owners,
+      pool: pool
+    }
+    if (hasError) {
+      if (form === 'edit') {
+        params.errorMessage = 'Error Updating Pool'
+      } else {
+        params.errorMessage = 'Error Creating Pool'
+      }
+    }
+    res.render(`pools/${form}`, params)
+  } catch {
+    res.redirect('/pools')
+  }
+}
 
 function saveCover(pool, coverEncoded) {
   if (coverEncoded == null) return

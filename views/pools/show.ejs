@@ -1,24 +1,17 @@
-<h2 class="page-header"><%= pool.title %></h2>
-<div class="book-details">
-  <div>
-    <div class="book-details-btn-grid">
-      <a class="btn btn-primary" href="/pools/<%= pool.id %>/edit">Edit</a>
-      <%- include('../partials/deleteForm', { url: `/pools/${pool.id}` }) %>
-      <a class="btn btn-primary book-details-author-button" <% if(pool.owner) { %> href="/owners/<%= pool.owner.id %>"
-          <% } else { %> href="#" <% } %>>
-              View Owner Details
-      </a>
-    </div>
-  </div>
-  <div class="book-details-grid">
-    <div class="book-details-label">Owner:</div>
-    <div><%= pool.owner ? pool.owner.name : 'Owner Not Chosen or Deleted' %></div>
-    <div class="book-details-label">Type of Pool:</div>
-    <div><%= pool.type %></div>
-    <div class="book-details-label">Status:</div>
-    <div><%= pool.status %></div>
-    <div class="book-details-label">Description:</div>
-    <div><%= pool.description %></div>
-  </div>
-  <img class="book-cover" src="<%= pool.coverImagePath %>">
+<h2 class="page-header">
+  <%= pool.owner ? pool.owner.name : 'Owner Not Chosen or Deleted' %>
+</h2>
+<ul style="list-style-type:none;">
+  <li>Pool Type: <%= " " + pool.type %></li>
+  <li>Pool Status: <%= " " + pool.status %></li>
+</ul>
+<p>Information: <%= " " + pool.description %></p>
+<img class="" style="margin-top: 10px; margin-bottom: 10px;" src="<%= pool.coverImagePath %>">
+<div class="btn-row">
+  <a class="btn btn-primary" href="/pools/<%= pool.id %>/edit">Edit</a>
+  <%- include('../partials/deleteForm', { url: `/pools/${pool.id}` }) %>
+  <a class="btn btn-primary book-details-author-button" <% if(pool.owner) { %> href="/owners/<%= pool.owner.id %>"
+    <% } else { %> href="#" <% } %>>
+        View Owner Details
+</a>
 </div>
