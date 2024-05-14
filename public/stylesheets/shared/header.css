@@ -39,3 +39,7 @@
   .header-nav li a:hover, .header-title:hover {
     color: white;
   }
+
+  .header-nav li a.active {
+    color: white;
+  }

@@ -8,6 +8,10 @@
     --color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 73%);
     --color-btn-danger-text: black;
     --color-btn-danger-text-dark: black;
+    --color-btn-success-background: hsl(120, 100%, 83%);
+    --color-btn-success-background-dark: hsl(120, 100%, 73%);
+    --color-btn-success-text: hsl(120, 100%, 20%);
+    --color-btn-success-text-dark: hsl(120, 100%, 10%);
   }
   
   .btn {
@@ -53,3 +57,13 @@
     color: var(--color-btn-danger-text-dark);
     background-color: var(--color-btn-danger-background-dark);
   }
+
+  .btn-success {
+    color: var(--color-btn-success-text);
+    background-color: var(--color-btn-success-background);
+}
+
+.btn-success:hover {
+    color: var(--color-btn-success-text-dark);
+    background-color: var(--color-btn-success-background-dark);
+}

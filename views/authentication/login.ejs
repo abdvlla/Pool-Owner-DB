@@ -1,37 +1,23 @@
-<h2>Login</h2>
-<form action="/login" method="POST">
-    <div>
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" required>
+<div class="authenticationform">
+    <h2 class="page-header">Login</h2>
+    <form action="/login" method="POST">
+        <div class="form-row">
+            <div class="form-item">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" size="30" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-item">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+                <p id="text">WARNING! Caps Lock is ON</p>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" class="loginbtn"
+            style="display: block; margin-left: auto; margin-right: auto;">Sign in</button>
+    </form>
+    <a class="btn btn-primary" href="/register" style="margin-top: 50px;">Register</a>
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <p id="text">WARNING! Caps Lock is ON</p>
-    </div>
-    <button type="submit" class="loginbtn">Login</button>
-</form>
-<a href="/register">Register</a>
 
-<style>
-    #text {
-        display: none;
-        color: red;
-    }
-</style>
-
-<script>
-    var input = document.getElementById("password");
-    var text = document.getElementById("text");
-    input.addEventListener("keyup", function (event) {
-
-        if (event.getModifierState("CapsLock")) {
-            text.style.display = "block";
-        } else {
-            text.style.display = "none"
-        }
-    });
-
-    
-</script>
-
+<%- include('../partials/authenticationstyle.ejs') %>

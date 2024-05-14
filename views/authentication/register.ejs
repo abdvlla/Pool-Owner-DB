@@ -1,17 +1,29 @@
-<h2>Register</h2>
-<form action="/register" method="POST">
-    <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" required>
-    </div>
-    <div>
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" pattern="a@a.com" size="30" required>
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-    </div>
-    <button type="submit">Register</button>
-</form>
-<a href="/login">Login</a>
+<div class="authenticationform">
+    <h2 class="page-header" style="display: block; margin-left: auto; margin-right: auto;">Register</h2>
+    <form action="/register" method="POST">
+        <div class="form-row">
+            <div class="form-item">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-item">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" size="30" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-item">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+                <p id="text">WARNING! Caps Lock is ON</p>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"
+            style="display: block; margin-left: auto; margin-right: auto;">Register</button>
+    </form>
+    <a class="btn btn-primary" href="/login">Login</a>
+</div>
+
+<%- include('../partials/authenticationstyle.ejs') %>

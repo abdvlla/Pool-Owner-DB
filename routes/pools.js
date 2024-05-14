@@ -39,7 +39,7 @@ router.get('/new', ensureAuthenticated, (req, res) => {
 })
 
 // Create Pool Route
-router.post('/', upload.single('cover'), async (req, res) => {
+router.post('/', ensureAuthenticated, upload.single('cover'), async (req, res) => {
   const fileName = req.file != null ? req.file.filename : null
   const pool = new Pool({
     type: req.body.type,
@@ -62,7 +62,7 @@ router.post('/', upload.single('cover'), async (req, res) => {
 })
 
 // Show Pool Route
-router.get('/:id', async (req, res) => {
+router.get('/:id', ensureAuthenticated, async (req, res) => {
   try {
     const pool = await Pool.findById(req.params.id)
       .populate('owner')
@@ -74,7 +74,7 @@ router.get('/:id', async (req, res) => {
 })
 
 // Edit Pool Route
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', ensureAuthenticated, async (req, res) => {
   try {
     const pool = await Pool.findById(req.params.id)
     renderEditPage(res, pool)
@@ -83,7 +83,7 @@ router.get('/:id/edit', async (req, res) => {
   }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', ensureAuthenticated, async (req, res) => {
   let pool;
 
   try {
@@ -110,7 +110,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete Pool Page
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', ensureAuthenticated, async (req, res) => {
   try {
     const pool = await Pool.findById(req.params.id);
 

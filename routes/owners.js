@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   })
   try {
     const newOwner = await owner.save()
-    console.log("hi");
+    console.log("Successfully created entry");
     res.redirect(`owners/${newOwner.id}`)
   } catch (error) {
     console.log(error);

@@ -6,6 +6,7 @@
   <li><%= owner.email %></li>
 </ul>
 <div class="btn-row">
+  <a class="btn btn-success" href="/pools/new?owner=<%= owner.id %>">Add Pool</a>
   <a class="btn btn-primary" href="/owners/<%= owner.id %>/edit">Edit</a>
   <%- include('../partials/deleteForm', { url: `/owners/${owner.id}` }) %>
 </div>
