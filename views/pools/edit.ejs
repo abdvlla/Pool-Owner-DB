@@ -1,5 +1,5 @@
 <h2 class="page-header">Edit Pool</h2>
-<form action="/pools/<%= pool.id %>?_method=PUT" method="POST">
+<form action="/pools/<%= pool.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
   <%- include('_form_fields') %>
   <div class="form-row form-row-end btn-row">
     <a class="btn btn-danger" href="/pools">Cancel</a>

@@ -48,7 +48,6 @@ router.post('/', ensureAuthenticated, upload.single('cover'), async (req, res) =
     coverImageName: fileName,
     description: req.body.description
   })
-  saveCover(pool, req.body.cover)
 
   try {
     const newPool = await pool.save()
@@ -83,7 +82,7 @@ router.get('/:id/edit', ensureAuthenticated, async (req, res) => {
   }
 })
 
-router.put('/:id', ensureAuthenticated, async (req, res) => {
+router.put('/:id', ensureAuthenticated, upload.single('cover'), async (req, res) => {
   let pool;
 
   try {
@@ -93,8 +92,12 @@ router.put('/:id', ensureAuthenticated, async (req, res) => {
     pool.status = req.body.status;
     pool.description = req.body.description;
     
-    if (req.body.cover != null && req.body.cover !== '') {
-      saveCover(pool, req.body.cover);
+    if (req.file) {
+      const fileName = req.file.filename;
+      if (pool.coverImageName) {
+        removePoolCover(pool.coverImageName); // Remove old cover image
+      }
+      pool.coverImageName = fileName; // Update cover image name
     }
 
     await pool.save();
@@ -108,6 +111,7 @@ router.put('/:id', ensureAuthenticated, async (req, res) => {
     }
   }
 });
+
 
 // Delete Pool Page
 router.delete('/:id', ensureAuthenticated, async (req, res) => {
@@ -167,13 +171,5 @@ async function renderFormPage(res, pool, form, hasError = false) {
   }
 }
 
-function saveCover(pool, coverEncoded) {
-  if (coverEncoded == null) return
-  const cover = JSON.parse(coverEncoded)
-  if (cover != null && imageMimeTypes.includes(cover.type)) {
-    pool.coverImage = new Buffer.from(cover.data, 'base64')
-    pool.coverImageType = cover.type
-  }
-}
 
 module.exports = router;
